@@ -1,14 +1,14 @@
-Game Overview
+**Game Overview**
 
-Premise
+**Premise**
 
 The game revolves around a demonic theme where the player investigates haunted locations filled with mannequins. Among these mannequins are ones that can move and affect the player’s sanity. The player’s goal is to identify the type of ghost or demon by gathering clues based on how they interact with the mannequins.
 
-Genre
+**Genre**
 
 Horror, Investigation, Survival
 
-Core Gameplay Loop
+**Core Gameplay Loop**
 
 Enter the Location: Start in a haunted environment filled with mannequins.
 
@@ -20,7 +20,7 @@ Analyze Evidence: Use gathered evidence to determine the ghost/demon type.
 
 Escape: Successfully identify the entity or succumb to the haunting.
 
-Gameplay Features
+**Gameplay Features**
 
 Ghost/Demon Mechanics
 
@@ -38,7 +38,7 @@ Overlapping abilities among ghost/demon types make identification challenging.
 
 Example abilities include mannequin possession, creating auditory/visual hallucinations, and environment manipulation.
 
-Sanity System
+**Sanity System**
 
 Sanity decreases as the player encounters supernatural phenomena or lingers too long near active mannequins.
 
@@ -50,7 +50,7 @@ Increased mannequin movement and aggression.
 
 Intensified hallucinations and reduced field of vision.
 
-Evidence Collection
+**Evidence Collection**
 
 Unique tools to identify supernatural entities, such as:
 
@@ -62,7 +62,7 @@ Spectral Imager: Reveals ghostly outlines interacting with mannequins.
 
 Psychic Resonator: Plays back ghostly whispers and sounds related to mannequin manipulation.
 
-Setting
+**Setting**
 
 Suggestions for Environment
 
@@ -78,7 +78,7 @@ Dynamic Environment
 
 The setting dynamically changes as sanity drops. Example: Blood seeps into the walls, mannequins multiply, and lighting becomes more erratic.
 
-Game Objectives
+**Game Objectives**
 
 Collect evidence of the ghost/demon.
 
@@ -88,7 +88,7 @@ Survive by managing sanity and avoiding active mannequins.
 
 Escape the haunted location after gathering sufficient evidence.
 
-Player Progression
+**Player Progression**
 
 Unlock additional tools as levels progress.
 
@@ -96,7 +96,7 @@ Encounter more complex ghost/demon behaviors in later stages.
 
 Introduce cooperative multiplayer mode to strategize investigations.
 
-Art and Aesthetic
+**Art and Aesthetic**
 
 Mannequin Design:
 
@@ -112,7 +112,7 @@ Dark and claustrophobic settings.
 
 Flickering lights and subtle sound cues to heighten tension.
 
-Challenges and Replayability
+**Challenges and Replayability**
 
 Procedurally generated clues and mannequin behaviors.
 
@@ -122,7 +122,7 @@ Randomized mannequin layouts in each playthrough.
 
 Player choice of tools influencing investigation strategies.
 
-Inspirations
+**Inspirations**
 
 Phasmophobia: Investigation mechanics.
 
@@ -130,6 +130,6 @@ The Conjuring: Mannequin and horror design.
 
 Outlast: Sanity-driven gameplay.
 
-Conclusion
+**Conclusion**
 
 This game combines investigative gameplay with a unique horror theme centered around mannequins. Its dynamic environments, overlapping clues, and sanity mechanics ensure a terrifying and engaging experience for players.
