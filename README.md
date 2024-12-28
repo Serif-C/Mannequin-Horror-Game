@@ -9,6 +9,7 @@ The game revolves around a demonic theme where the player investigates haunted l
 Horror, Investigation, Survival
 
 **Core Gameplay Loop**
+
 Enter the Location: Start in a haunted environment filled with mannequins.
 Gather Equipment: Equip tools to gather evidence and identify the entity.
 Investigate: Observe mannequin behavior and collect clues.
