@@ -76,29 +76,19 @@ public class Behaviour : MonoBehaviour
     private void AssignBehaviourState()
     {
         if(playerSanity >= 80f && playerSanity <= 100f)
-        {
             intensity = BehaviourIntensity.VERY_LOW;
-        }
 
         else if(playerSanity >= 60f && playerSanity < 80f)
-        {
             intensity = BehaviourIntensity.LOW;
-        }
 
         else if (playerSanity >= 40f && playerSanity < 60f)
-        {
             intensity = BehaviourIntensity.MEDIUM;
-        }
 
         else if (playerSanity >= 20f && playerSanity < 40f)
-        {
             intensity = BehaviourIntensity.HIGH;
-        }
 
         else
-        {
             intensity = BehaviourIntensity.VERY_HIGH;
-        }
     }
 
     private void VeryLowBehaviour()
