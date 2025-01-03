@@ -32,11 +32,12 @@ public class SanityManager : MonoBehaviour
     {
         // Decrease sanity at an even interval
         currentSanityValue -= sanityDecreaseRate * Time.deltaTime;
+        Debug.Log("Current Sanity: " + currentSanityValue);
     }
 
     private bool IsInDarkness()
     {
-        // Probably use Candles/Flashlight to determine this
+        // Probably use Candles or Flashlight to determine this
         return false;
     }
 
