@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Behaviour : MonoBehaviour
@@ -19,19 +21,79 @@ public class Behaviour : MonoBehaviour
      */
 
     [Header("References")]
-    [SerializeField] private GameObject playerSanity;
+    [SerializeField] private float playerSanity;
+    [SerializeField] private Animator animator;
 
     [Header("Enemy Status")]
-    [SerializeField] private BehaviourIntensity intensity;
+    [SerializeField] private float moveSpeed;
     [SerializeField] private bool isPossessed = false;
     [SerializeField] private bool isHaunting = false;
+    [SerializeField] private bool isInLineOfSight = false;
 
-    private enum BehaviourIntensity
+    [SerializeField] private BehaviourIntensity intensity;
+    enum BehaviourIntensity
     {
         VERY_LOW,
         LOW,
-        MEDUIM,
+        MEDIUM,
         HIGH,
         VERY_HIGH
+    }
+
+    private void Start()
+    {
+        playerSanity = FindAnyObjectByType<SanityManager>().GetSanityValue();
+    }
+
+    private void Update()
+    {
+        AssignBehaviourState();
+
+        switch (intensity)
+        {
+            case BehaviourIntensity.VERY_LOW:
+                break;
+
+            case BehaviourIntensity.LOW:
+                break;
+
+            case BehaviourIntensity.MEDIUM:
+                break;
+
+            case BehaviourIntensity.HIGH:
+                break;
+
+            case BehaviourIntensity.VERY_HIGH:
+                break;
+        }
+    }
+
+    private void AssignBehaviourState()
+    {
+        if(playerSanity >= 80f && playerSanity <= 100f)
+        {
+            intensity = BehaviourIntensity.VERY_LOW;
+        }
+        else if(playerSanity >= 60f && playerSanity < 80f)
+        {
+            intensity = BehaviourIntensity.LOW;
+        }
+        else if (playerSanity >= 40f && playerSanity < 60f)
+        {
+            intensity = BehaviourIntensity.MEDIUM;
+        }
+        else if (playerSanity >= 20f && playerSanity < 40f)
+        {
+            intensity = BehaviourIntensity.HIGH;
+        }
+        else
+        {
+            intensity = BehaviourIntensity.VERY_HIGH;
+        }
+    }
+
+    private void VeryLowBehaviour()
+    {
+
     }
 }

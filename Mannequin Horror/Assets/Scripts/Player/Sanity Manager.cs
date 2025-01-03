@@ -35,6 +35,11 @@ public class SanityManager : MonoBehaviour
         Debug.Log("Current Sanity: " + currentSanityValue);
     }
 
+    public float GetSanityValue()
+    {
+        return currentSanityValue;
+    }
+
     private bool IsInDarkness()
     {
         // Probably use Candles or Flashlight to determine this
