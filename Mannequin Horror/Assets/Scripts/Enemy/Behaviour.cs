@@ -52,18 +52,23 @@ public class Behaviour : MonoBehaviour
         switch (intensity)
         {
             case BehaviourIntensity.VERY_LOW:
+                VeryLowBehaviour();
                 break;
 
             case BehaviourIntensity.LOW:
+                LowBehaviour();
                 break;
 
             case BehaviourIntensity.MEDIUM:
+                MediumBehaviour();
                 break;
 
             case BehaviourIntensity.HIGH:
+                HighBehaviour();
                 break;
 
             case BehaviourIntensity.VERY_HIGH:
+                VeryHighBehaviour();
                 break;
         }
     }
@@ -93,6 +98,26 @@ public class Behaviour : MonoBehaviour
     }
 
     private void VeryLowBehaviour()
+    {
+
+    }
+
+    private void LowBehaviour()
+    {
+
+    }
+
+    private void MediumBehaviour()
+    {
+
+    }
+
+    private void HighBehaviour()
+    {
+
+    }
+
+    private void VeryHighBehaviour()
     {
 
     }
