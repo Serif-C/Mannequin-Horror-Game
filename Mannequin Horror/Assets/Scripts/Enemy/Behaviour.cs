@@ -25,9 +25,10 @@ public class Behaviour : MonoBehaviour
     [SerializeField] private Animator animator;
 
     [Header("Enemy Status")]
-    [SerializeField] private float moveSpeed;
     [SerializeField] private bool isPossessed = false;
+    [SerializeField] private float hauntChance = 0.002f;  // 0.2% chance that a demon would start haunting (calculated every second)
     [SerializeField] private bool isHaunting = false;
+    [SerializeField] private float hauntDuration = 10f;
     [SerializeField] private bool isInLineOfSight = false;
 
     [SerializeField] private BehaviourIntensity intensity;
@@ -48,6 +49,7 @@ public class Behaviour : MonoBehaviour
     private void Update()
     {
         AssignBehaviourState();
+        CalculateHauntChance();
 
         switch (intensity)
         {
@@ -93,7 +95,7 @@ public class Behaviour : MonoBehaviour
 
     private void VeryLowBehaviour()
     {
-
+        
     }
 
     private void LowBehaviour()
@@ -114,5 +116,25 @@ public class Behaviour : MonoBehaviour
     private void VeryHighBehaviour()
     {
 
+    }
+
+    private void StartHaunting()
+    {
+        // Choose one of the mannequins to chase the player
+    }
+
+    private IEnumerator CalculateHauntChance()
+    {
+        // Only check while not haunting
+        while (!isHaunting)
+        {
+            yield return new WaitForSeconds(1);
+
+            if(Random.value <= hauntChance)
+            {
+                StartHaunting();
+                yield break;    // Stop checking once haunting starts
+            }
+        }
     }
 }
