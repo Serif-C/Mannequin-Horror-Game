@@ -11,9 +11,13 @@ Horror, Investigation, Survival
 **Core Gameplay Loop**
 
 Enter the Location: Start in a haunted environment filled with mannequins.
+
 Gather Equipment: Equip tools to gather evidence and identify the entity.
+
 Investigate: Observe mannequin behavior and collect clues.
+
 Analyze Evidence: Use gathered evidence to determine the ghost/demon type.
+
 Escape: Successfully identify the entity or succumb to the haunting.
 
 **Gameplay Features**
