@@ -95,7 +95,10 @@ public class GhostBehaviour : MonoBehaviour
 
     private void VeryLowBehaviour()
     {
-        
+        /*
+         * - Haunting Chance is unchanged from default.
+         * - Posture Changes when outside player's line of sight
+         */
     }
 
     private void LowBehaviour()
