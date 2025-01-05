@@ -4,7 +4,7 @@ using System.Diagnostics;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Behaviour : MonoBehaviour
+public class GhostBehaviour : MonoBehaviour
 {
     /*
      * Enemy Behaviour:
@@ -44,12 +44,12 @@ public class Behaviour : MonoBehaviour
     private void Start()
     {
         playerSanity = FindAnyObjectByType<SanityManager>().GetSanityValue();
+        StartCoroutine(CalculateHauntChance());
     }
 
     private void Update()
     {
         AssignBehaviourState();
-        CalculateHauntChance();
 
         switch (intensity)
         {
@@ -77,10 +77,10 @@ public class Behaviour : MonoBehaviour
 
     private void AssignBehaviourState()
     {
-        if(playerSanity >= 80f && playerSanity <= 100f)
+        if (playerSanity >= 80f && playerSanity <= 100f)
             intensity = BehaviourIntensity.VERY_LOW;
 
-        else if(playerSanity >= 60f && playerSanity < 80f)
+        else if (playerSanity >= 60f && playerSanity < 80f)
             intensity = BehaviourIntensity.LOW;
 
         else if (playerSanity >= 40f && playerSanity < 60f)
@@ -130,7 +130,7 @@ public class Behaviour : MonoBehaviour
         {
             yield return new WaitForSeconds(1);
 
-            if(Random.value <= hauntChance)
+            if (Random.value <= hauntChance)
             {
                 StartHaunting();
                 yield break;    // Stop checking once haunting starts

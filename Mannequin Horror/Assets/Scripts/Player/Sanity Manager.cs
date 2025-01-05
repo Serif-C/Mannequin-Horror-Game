@@ -43,11 +43,11 @@ public class SanityManager : MonoBehaviour
     private bool IsInDarkness()
     {
         // Probably use Candles or Flashlight to determine this
-        return false;
+        return isInDarkness;
     }
 
     private bool InInfluenced()
     {
-        return false;
+        return isInfluenced;
     }
 }
