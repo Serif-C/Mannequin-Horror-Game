@@ -31,6 +31,7 @@ public class LineOfSight : MonoBehaviour
         // Check if there is an obstruction
         if (Physics.Raycast(transform.position, directionToEnemy, out RaycastHit hit, distanceFromEnemy, collisionLayer))
         {
+            Debug.Log("Raycast hit: " + hit.collider.name);
             return false;
         }
 
@@ -41,12 +42,27 @@ public class LineOfSight : MonoBehaviour
     {
         Collider[] mannequinsInRange = Physics.OverlapSphere(transform.position, viewDistance, enemyLayer);
 
-        foreach (Collider manneqiun in mannequinsInRange)
+        foreach (Collider mannequin in mannequinsInRange)
         {
-            if(IsEnemyInSight(manneqiun.transform))
+            if(IsEnemyInSight(mannequin.transform))
             {
-                Debug.Log("Seeing a mannequin of name: " + manneqiun.gameObject.name);
+                Debug.Log("Seeing a mannequin of name: " + mannequin.gameObject.name);
             }
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        // Draw vision sphere
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, viewDistance);
+
+        // Draw vision cone
+        Vector3 leftBoundary = Quaternion.Euler(0, -fieldOfView / 2, 0) * transform.forward * viewDistance;
+        Vector3 rightBoundary = Quaternion.Euler(0, fieldOfView / 2, 0) * transform.forward * viewDistance;
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawRay(transform.position, leftBoundary);
+        Gizmos.DrawRay(transform.position, rightBoundary);
     }
 }
