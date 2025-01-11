@@ -28,10 +28,10 @@ public class GhostBehaviour : MonoBehaviour
     [SerializeField] private float hauntChance = 0.002f;  // 0.2% chance that a demon would start haunting (calculated every second)
     [SerializeField] private bool isHaunting = false;
     [SerializeField] private float hauntDuration = 10f;
-    [SerializeField] private bool isInLineOfSight = false;
+    //[SerializeField] private bool isInLineOfSight = false;
 
     [SerializeField] private BehaviourIntensity intensity;
-    enum BehaviourIntensity
+    public enum BehaviourIntensity
     {
         VERY_LOW,
         LOW,
@@ -135,5 +135,10 @@ public class GhostBehaviour : MonoBehaviour
                 yield break;    // Stop checking once haunting starts
             }
         }
+    }
+
+    public BehaviourIntensity GetIntensity()
+    {
+        return intensity;
     }
 }

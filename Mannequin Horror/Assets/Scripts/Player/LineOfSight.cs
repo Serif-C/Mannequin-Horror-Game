@@ -50,7 +50,7 @@ public class LineOfSight : MonoBehaviour
         {
             if(IsEnemyInSight(mannequin.transform))
             {
-                //Debug.Log("Seeing a mannequin of name: " + mannequin.gameObject.name);
+                Debug.Log("Seeing a mannequin of name: " + mannequin.gameObject.name);
             }
         }
     }
