@@ -39,20 +39,15 @@ public class LineOfSight : MonoBehaviour
         // Check if within field of view
         if (Vector3.Angle(transform.forward, directionToEnemy) > fieldOfView / 2)
         {
-            //enemy.GetComponent<GhostMovement>().SetIsInLineOfSight(false);
             return false;
         }
 
         // Check if there is an obstruction
         if (Physics.Raycast(transform.position, directionToEnemy, out RaycastHit hit, distanceFromEnemy, collisionLayer))
         {
-            //Debug.Log("Raycast hit: " + hit.collider.name);
-            //enemy.GetComponent<GhostMovement>().SetIsInLineOfSight(false);
             return false;
         }
 
-        // When an enemy is in Line of Sight toggle its attribute 'isInLineOfSight' to true
-        //enemy.GetComponent<GhostMovement>().SetIsInLineOfSight(true);
         return true;
     }
 
