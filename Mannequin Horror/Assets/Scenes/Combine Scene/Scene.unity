@@ -2236,7 +2236,7 @@ Transform:
   m_GameObject: {fileID: 1771273337}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.71, z: 0.71}
+  m_LocalPosition: {x: 0, y: 1.71, z: 0.485}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2692,7 +2692,6 @@ MonoBehaviour:
   hauntChance: 1
   isHaunting: 0
   hauntDuration: 10
-  isInLineOfSight: 0
   intensity: 0
 --- !u!1001 &2080012327
 PrefabInstance:

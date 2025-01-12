@@ -12,6 +12,20 @@ public class LineOfSight : MonoBehaviour
     [SerializeField] private float fieldOfView = 90f;   // FOV in degrees
     [SerializeField] private float viewDistance = 10f;
 
+    private List<GhostMovement> allEnemies = new List<GhostMovement>();
+
+    private void Start()
+    {
+        foreach(GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            GhostMovement ghostMovement = enemy.GetComponent<GhostMovement>();
+            if (ghostMovement != null)
+            {
+                allEnemies.Add(ghostMovement);
+            }
+        }
+    }
+
     private void Update()
     {
         DetectMannequinsInSight();
@@ -31,7 +45,6 @@ public class LineOfSight : MonoBehaviour
         // Check if there is an obstruction
         if (Physics.Raycast(transform.position, directionToEnemy, out RaycastHit hit, distanceFromEnemy, collisionLayer))
         {
-            Debug.Log("Raycast hit: " + hit.collider.name);
             return false;
         }
 
@@ -41,12 +54,27 @@ public class LineOfSight : MonoBehaviour
     private void DetectMannequinsInSight()
     {
         Collider[] mannequinsInRange = Physics.OverlapSphere(transform.position, viewDistance, enemyLayer);
+        HashSet<GhostMovement> enemiesInRange = new HashSet<GhostMovement>();
 
-        foreach (Collider mannequin in mannequinsInRange)
+        // Process enemies inside the detection radius
+        foreach(Collider mannequin in mannequinsInRange)
         {
-            if(IsEnemyInSight(mannequin.transform))
+            GhostMovement ghostMovement = mannequin.GetComponent<GhostMovement>();
+
+            if(ghostMovement != null)
             {
-                Debug.Log("Seeing a mannequin of name: " + mannequin.gameObject.name);
+                bool isSeen = IsEnemyInSight(mannequin.transform);
+                ghostMovement.SetIsInLineOfSight(isSeen);
+                enemiesInRange.Add(ghostMovement);
+            }
+        }
+
+        // Ensure enemies outside the sphere still move towards the player
+        foreach(GhostMovement enemy in allEnemies)
+        {
+            if(!enemiesInRange.Contains(enemy))
+            {
+                enemy.SetIsInLineOfSight(false);
             }
         }
     }
