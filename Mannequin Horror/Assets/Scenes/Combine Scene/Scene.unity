@@ -2451,8 +2451,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1914888378}
+  - component: {fileID: 1914888379}
   m_Layer: 0
-  m_Name: Mannequins
+  m_Name: Demon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2474,6 +2475,27 @@ Transform:
   - {fileID: 2056543659}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1914888379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914888377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e711327c5978faf4a9a4ac02c616aca0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canWalk: 0
+  canBePossessed: 0
+  canContorque: 0
+  canLevitate: 0
+  intensityLevel: 000000000100000002000000030000000400000005000000
+  canLeaveHandprints: 0
+  canJumpscare: 0
+  canCauseBugInfestation: 0
+  enemiesToPossess: []
 --- !u!1001 &2013920638
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2631,7 +2653,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2056543659}
-  - component: {fileID: 2056543661}
   m_Layer: 0
   m_Name: Mannequin
   m_TagString: Untagged
@@ -2674,25 +2695,6 @@ Transform:
   - {fileID: 625972183}
   m_Father: {fileID: 1914888378}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2056543661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2056543658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa666df6d49a10141ae13f253685a968, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerSanity: 0
-  animator: {fileID: 0}
-  isPossessed: 0
-  hauntChance: 1
-  isHaunting: 0
-  hauntDuration: 10
-  intensity: 0
 --- !u!1001 &2080012327
 PrefabInstance:
   m_ObjectHideFlags: 0

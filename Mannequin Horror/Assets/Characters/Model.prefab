@@ -678,11 +678,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSanity: 0
   animator: {fileID: 0}
+  demonThisRound: {fileID: 0}
   isPossessed: 0
   hauntChance: 0.002
   isHaunting: 0
   hauntDuration: 10
-  intensity: 1
+  intensity: 0
 --- !u!195 &5980663378964714107
 NavMeshAgent:
   m_ObjectHideFlags: 0
