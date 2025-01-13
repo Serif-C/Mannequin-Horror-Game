@@ -22,15 +22,15 @@ public class GhostBehaviour : MonoBehaviour
     [Header("References")]
     [SerializeField] private float playerSanity;
     [SerializeField] private Animator animator;
+    [SerializeField] private Demons demonThisRound;
 
     [Header("Enemy Status")]
     [SerializeField] private bool isPossessed = false;
     [SerializeField] private float hauntChance = 0.002f;  // 0.2% chance that a demon would start haunting (calculated every second)
     [SerializeField] private bool isHaunting = false;
     [SerializeField] private float hauntDuration = 10f;
-    //[SerializeField] private bool isInLineOfSight = false;
-
     [SerializeField] private BehaviourIntensity intensity;
+
     public enum BehaviourIntensity
     {
         VERY_LOW,
@@ -42,7 +42,7 @@ public class GhostBehaviour : MonoBehaviour
 
     private void Start()
     {
-        playerSanity = FindAnyObjectByType<SanityManager>().GetSanityValue();
+        demonThisRound = FindAnyObjectByType<Demons>();
         StartCoroutine(CalculateHauntChance());
     }
 
@@ -50,32 +50,37 @@ public class GhostBehaviour : MonoBehaviour
     {
         AssignBehaviourState();
 
+        Debug.Log("playerSanity: " + playerSanity);
+
+        // Reference the behaviours for each intensity through `Demons` script
         switch (intensity)
         {
             case BehaviourIntensity.VERY_LOW:
-                VeryLowBehaviour();
+                demonThisRound.VeryLowBehaviour();
                 break;
 
             case BehaviourIntensity.LOW:
-                LowBehaviour();
+                demonThisRound.LowBehaviour();
                 break;
 
             case BehaviourIntensity.MEDIUM:
-                MediumBehaviour();
+                demonThisRound.MediumBehaviour();
                 break;
 
             case BehaviourIntensity.HIGH:
-                HighBehaviour();
+                demonThisRound.HighBehaviour();
                 break;
 
             case BehaviourIntensity.VERY_HIGH:
-                VeryHighBehaviour();
+                demonThisRound.VeryHighBehaviour();
                 break;
         }
     }
 
     private void AssignBehaviourState()
     {
+        playerSanity = FindAnyObjectByType<SanityManager>().GetSanityValue();
+
         if (playerSanity >= 80f && playerSanity <= 100f)
             intensity = BehaviourIntensity.VERY_LOW;
 
@@ -88,33 +93,8 @@ public class GhostBehaviour : MonoBehaviour
         else if (playerSanity >= 20f && playerSanity < 40f)
             intensity = BehaviourIntensity.HIGH;
 
-        else
+        else if (playerSanity >= 0f && playerSanity < 20f)
             intensity = BehaviourIntensity.VERY_HIGH;
-    }
-
-    private void VeryLowBehaviour()
-    {
-        
-    }
-
-    private void LowBehaviour()
-    {
-
-    }
-
-    private void MediumBehaviour()
-    {
-
-    }
-
-    private void HighBehaviour()
-    {
-
-    }
-
-    private void VeryHighBehaviour()
-    {
-
     }
 
     private void StartHaunting()
