@@ -5,20 +5,6 @@ using UnityEngine;
 
 public class GhostBehaviour : MonoBehaviour
 {
-    /*
-     * Enemy Behaviour:
-     * - Based off player sanity
-     * - More intense and complex behaviour as player sanity diminishes
-     * - Example:
-     *      * At sanity range 100 to 80:
-     *          * Haunting Chance (calculated per second) is very low
-     *          * Mannequins can change posture/stance/pose but cannot walk yet
-     *      * At sanity range 80 to 60:
-     *          * Haunting Chance (calculated per second) is slightly higher
-     *          * Mannequins can now walk slowly when outside player line of sight
-     *      * Etc...
-     */
-
     [Header("References")]
     [SerializeField] private float playerSanity;
     [SerializeField] private Animator animator;

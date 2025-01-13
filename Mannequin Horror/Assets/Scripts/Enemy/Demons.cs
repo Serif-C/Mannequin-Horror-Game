@@ -31,6 +31,7 @@ public class Demons : MonoBehaviour
 
     private DemonType demonType;
 
+    // Add a couple more later
     public enum DemonType
     {
         DEFAULT
