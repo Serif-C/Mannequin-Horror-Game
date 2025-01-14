@@ -42,7 +42,7 @@ public class GhostBehaviour : MonoBehaviour
 
         Debug.Log("playerSanity: " + playerSanity);
 
-        // Reference the behaviours for each intensity through `Demons` script
+        // Reference the behaviours for each intensity through `Demons` script and assign levels for each action
         switch (intensity)
         {
             case BehaviourIntensity.VERY_LOW:
@@ -107,10 +107,30 @@ public class GhostBehaviour : MonoBehaviour
         }
     }
 
+    // GETTERS and SETTERS //
+
     public BehaviourIntensity GetIntensity()
     {
         return intensity;
     }
 
+    public int GetWalkLevel()
+    {
+        return m_WalkLevel;
+    }
 
+    public int GetPossessionLevel()
+    {
+        return m_PossessionLevel;
+    }
+
+    public int GetContorsionLevel()
+    {
+        return m_ContorsionLevel;
+    }
+
+    public int GetLevitationLevel()
+    {
+        return m_LevitateLevel;
+    }
 }
