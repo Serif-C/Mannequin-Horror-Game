@@ -16,6 +16,10 @@ public class GhostBehaviour : MonoBehaviour
     [SerializeField] private bool isHaunting = false;
     [SerializeField] private float hauntDuration = 10f;
     [SerializeField] private BehaviourIntensity intensity;
+    private int m_WalkLevel = 0;
+    private int m_PossessionLevel = 0;
+    private int m_ContorsionLevel = 0;
+    private int m_LevitateLevel = 0;
 
     public enum BehaviourIntensity
     {
@@ -38,27 +42,27 @@ public class GhostBehaviour : MonoBehaviour
 
         Debug.Log("playerSanity: " + playerSanity);
 
-        // Reference the behaviours for each intensity through `Demons` script
+        // Reference the behaviours for each intensity through `Demons` script and assign levels for each action
         switch (intensity)
         {
             case BehaviourIntensity.VERY_LOW:
-                demonThisRound.VeryLowBehaviour();
+                demonThisRound.VeryLowBehaviourLevels(m_WalkLevel, m_PossessionLevel, m_ContorsionLevel, m_LevitateLevel);
                 break;
 
             case BehaviourIntensity.LOW:
-                demonThisRound.LowBehaviour();
+                demonThisRound.LowBehaviourLevels(m_WalkLevel, m_PossessionLevel, m_ContorsionLevel, m_LevitateLevel);
                 break;
 
             case BehaviourIntensity.MEDIUM:
-                demonThisRound.MediumBehaviour();
+                demonThisRound.MediumBehaviourLevels(m_WalkLevel, m_PossessionLevel, m_ContorsionLevel, m_LevitateLevel);
                 break;
 
             case BehaviourIntensity.HIGH:
-                demonThisRound.HighBehaviour();
+                demonThisRound.HighBehaviourLevels(m_WalkLevel, m_PossessionLevel, m_ContorsionLevel, m_LevitateLevel);
                 break;
 
             case BehaviourIntensity.VERY_HIGH:
-                demonThisRound.VeryHighBehaviour();
+                demonThisRound.VeryHighBehaviourLevels(m_WalkLevel, m_PossessionLevel, m_ContorsionLevel, m_LevitateLevel);
                 break;
         }
     }
@@ -103,8 +107,30 @@ public class GhostBehaviour : MonoBehaviour
         }
     }
 
+    // GETTERS and SETTERS //
+
     public BehaviourIntensity GetIntensity()
     {
         return intensity;
+    }
+
+    public int GetWalkLevel()
+    {
+        return m_WalkLevel;
+    }
+
+    public int GetPossessionLevel()
+    {
+        return m_PossessionLevel;
+    }
+
+    public int GetContorsionLevel()
+    {
+        return m_ContorsionLevel;
+    }
+
+    public int GetLevitationLevel()
+    {
+        return m_LevitateLevel;
     }
 }

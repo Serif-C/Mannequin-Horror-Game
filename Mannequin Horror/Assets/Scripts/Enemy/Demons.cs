@@ -15,10 +15,6 @@ public class Demons : MonoBehaviour
     [SerializeField] private bool canContorque = false;
     [SerializeField] private bool canLevitate = false;
     [SerializeField] private int[] intensityLevel = { 0, 1, 2, 3, 4, 5}; // Controls frequency and intensity
-    private int walkLevel = 0;
-    private int possessionLevel = 0;
-    private int contorsionLevel = 0;
-    private int levitateLevel = 0;
 
     // These clues are conditional and can be missed if not checked properly
     [Header("Default Demon Hidden Clues")]
@@ -49,7 +45,7 @@ public class Demons : MonoBehaviour
         }
     }
 
-    public void VeryLowBehaviour()
+    public void VeryLowBehaviourLevels(int walkLevel, int possessionLevel, int contorsionLevel, int levitateLevel)
     {
         if(demonType == DemonType.DEFAULT)
         {
@@ -64,7 +60,7 @@ public class Demons : MonoBehaviour
         }
     }
 
-    public void LowBehaviour()
+    public void LowBehaviourLevels(int walkLevel, int possessionLevel, int contorsionLevel, int levitateLevel)
     {
         if (demonType == DemonType.DEFAULT)
         {
@@ -79,7 +75,7 @@ public class Demons : MonoBehaviour
         }
     }
 
-    public void MediumBehaviour()
+    public void MediumBehaviourLevels(int walkLevel, int possessionLevel, int contorsionLevel, int levitateLevel)
     {
         if (demonType == DemonType.DEFAULT)
         {
@@ -94,7 +90,7 @@ public class Demons : MonoBehaviour
         }
     }
 
-    public void HighBehaviour()
+    public void HighBehaviourLevels(int walkLevel, int possessionLevel, int contorsionLevel, int levitateLevel)
     {
         if (demonType == DemonType.DEFAULT)
         {
@@ -109,7 +105,7 @@ public class Demons : MonoBehaviour
         }
     }
 
-    public void VeryHighBehaviour()
+    public void VeryHighBehaviourLevels(int walkLevel, int possessionLevel, int contorsionLevel, int levitateLevel)
     {
         if (demonType == DemonType.DEFAULT)
         {

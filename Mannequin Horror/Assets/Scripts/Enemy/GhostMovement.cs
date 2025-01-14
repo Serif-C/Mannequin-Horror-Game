@@ -72,29 +72,29 @@ public class GhostMovement : MonoBehaviour
     {
         // Update player reference every frame (ensures movement remains dynamic)
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        GhostBehaviour.BehaviourIntensity intensity = behaviour.GetIntensity();
+        int walkLevel = behaviour.GetWalkLevel();
 
         // Varied movement for testing purposes only
-        switch (intensity)
+        switch (walkLevel)
         {
-            case GhostBehaviour.BehaviourIntensity.VERY_LOW:
+            case 0:
                 agent.speed = 0f; // No movement
                 break;
 
-            case GhostBehaviour.BehaviourIntensity.LOW:
+            case 1:
                 agent.speed = 1.5f;
                 break;
 
-            case GhostBehaviour.BehaviourIntensity.MEDIUM:
+            case 2:
                 agent.speed = 2.5f;
                 break;
 
-            case GhostBehaviour.BehaviourIntensity.HIGH:
-                agent.speed = 3.5f;
+            case 3:
+                agent.speed = 3.0f;
                 break;
 
-            case GhostBehaviour.BehaviourIntensity.VERY_HIGH:
-                agent.speed = 5f; 
+            case 4:
+                agent.speed = 3.5f; 
                 break;
         }
 
@@ -117,5 +117,10 @@ public class GhostMovement : MonoBehaviour
         {
             StopMoving();
         }
+    }
+
+    private void WalkBehaviour()
+    {
+
     }
 }
