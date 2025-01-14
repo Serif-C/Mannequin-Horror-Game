@@ -45,7 +45,15 @@ public class Demons : MonoBehaviour
         }
     }
 
-    public void VeryLowBehaviourLevels(int walkLevel, int possessionLevel, int contorsionLevel, int levitateLevel)
+    // Called by GhostBehaviour script
+    public void PossessRandomMannequin()
+    {
+        int rand = Random.Range(0, enemiesToPossess.Count - 1);
+        enemiesToPossess[rand].SetPossession(true);
+    }
+
+
+    public void VeryLowBehaviourLevels(ref int walkLevel, ref int possessionLevel, ref int contorsionLevel, ref int levitateLevel)
     {
         if(demonType == DemonType.DEFAULT)
         {
@@ -60,7 +68,7 @@ public class Demons : MonoBehaviour
         }
     }
 
-    public void LowBehaviourLevels(int walkLevel, int possessionLevel, int contorsionLevel, int levitateLevel)
+    public void LowBehaviourLevels(ref int walkLevel, ref int possessionLevel, ref int contorsionLevel, ref int levitateLevel)
     {
         if (demonType == DemonType.DEFAULT)
         {
@@ -75,7 +83,7 @@ public class Demons : MonoBehaviour
         }
     }
 
-    public void MediumBehaviourLevels(int walkLevel, int possessionLevel, int contorsionLevel, int levitateLevel)
+    public void MediumBehaviourLevels(ref int walkLevel, ref int possessionLevel, ref int contorsionLevel, ref int levitateLevel)
     {
         if (demonType == DemonType.DEFAULT)
         {
@@ -90,7 +98,7 @@ public class Demons : MonoBehaviour
         }
     }
 
-    public void HighBehaviourLevels(int walkLevel, int possessionLevel, int contorsionLevel, int levitateLevel)
+    public void HighBehaviourLevels(ref int walkLevel, ref int possessionLevel, ref int contorsionLevel, ref int levitateLevel)
     {
         if (demonType == DemonType.DEFAULT)
         {
@@ -105,7 +113,7 @@ public class Demons : MonoBehaviour
         }
     }
 
-    public void VeryHighBehaviourLevels(int walkLevel, int possessionLevel, int contorsionLevel, int levitateLevel)
+    public void VeryHighBehaviourLevels(ref int walkLevel, ref int possessionLevel, ref int contorsionLevel, ref int levitateLevel)
     {
         if (demonType == DemonType.DEFAULT)
         {

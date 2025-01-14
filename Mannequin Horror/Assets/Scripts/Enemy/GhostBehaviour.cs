@@ -12,7 +12,7 @@ public class GhostBehaviour : MonoBehaviour
 
     [Header("Enemy Status")]
     [SerializeField] private bool isPossessed = false;
-    [SerializeField] private float hauntChance = 0.002f;  // 0.2% chance that a demon would start haunting (calculated every second)
+    [SerializeField] private float hauntChance = 20f; //0.002f;  // 0.2% chance that a demon would start haunting (calculated every second)
     [SerializeField] private bool isHaunting = false;
     [SerializeField] private float hauntDuration = 10f;
     [SerializeField] private BehaviourIntensity intensity;
@@ -40,29 +40,27 @@ public class GhostBehaviour : MonoBehaviour
     {
         AssignBehaviourState();
 
-        Debug.Log("playerSanity: " + playerSanity);
-
         // Reference the behaviours for each intensity through `Demons` script and assign levels for each action
         switch (intensity)
         {
             case BehaviourIntensity.VERY_LOW:
-                demonThisRound.VeryLowBehaviourLevels(m_WalkLevel, m_PossessionLevel, m_ContorsionLevel, m_LevitateLevel);
+                demonThisRound.VeryLowBehaviourLevels(ref m_WalkLevel, ref m_PossessionLevel, ref m_ContorsionLevel, ref m_LevitateLevel);
                 break;
 
             case BehaviourIntensity.LOW:
-                demonThisRound.LowBehaviourLevels(m_WalkLevel, m_PossessionLevel, m_ContorsionLevel, m_LevitateLevel);
+                demonThisRound.LowBehaviourLevels(ref m_WalkLevel, ref m_PossessionLevel, ref m_ContorsionLevel, ref m_LevitateLevel);
                 break;
 
             case BehaviourIntensity.MEDIUM:
-                demonThisRound.MediumBehaviourLevels(m_WalkLevel, m_PossessionLevel, m_ContorsionLevel, m_LevitateLevel);
+                demonThisRound.MediumBehaviourLevels(ref m_WalkLevel, ref m_PossessionLevel, ref m_ContorsionLevel, ref m_LevitateLevel);
                 break;
 
             case BehaviourIntensity.HIGH:
-                demonThisRound.HighBehaviourLevels(m_WalkLevel, m_PossessionLevel, m_ContorsionLevel, m_LevitateLevel);
+                demonThisRound.HighBehaviourLevels(ref m_WalkLevel, ref m_PossessionLevel, ref m_ContorsionLevel, ref m_LevitateLevel);
                 break;
 
             case BehaviourIntensity.VERY_HIGH:
-                demonThisRound.VeryHighBehaviourLevels(m_WalkLevel, m_PossessionLevel, m_ContorsionLevel, m_LevitateLevel);
+                demonThisRound.VeryHighBehaviourLevels(ref m_WalkLevel, ref m_PossessionLevel, ref m_ContorsionLevel, ref m_LevitateLevel);
                 break;
         }
     }
@@ -90,12 +88,14 @@ public class GhostBehaviour : MonoBehaviour
     private void StartHaunting()
     {
         // Choose one of the mannequins to chase the player
+        demonThisRound.PossessRandomMannequin();
+        Debug.Log("Started Haunting");
     }
 
     private IEnumerator CalculateHauntChance()
     {
         // Only check while not haunting
-        while (!isHaunting)
+        while (!isHaunting && !isPossessed)
         {
             yield return new WaitForSeconds(1);
 
@@ -114,7 +114,7 @@ public class GhostBehaviour : MonoBehaviour
         return intensity;
     }
 
-    public int GetWalkLevel()
+    public int GetWalkLevel() // Movement speed is based off this level
     {
         return m_WalkLevel;
     }
@@ -132,5 +132,10 @@ public class GhostBehaviour : MonoBehaviour
     public int GetLevitationLevel()
     {
         return m_LevitateLevel;
+    }
+
+    public void SetPossession(bool isPossessed)
+    {
+        this.isPossessed = isPossessed;
     }
 }
