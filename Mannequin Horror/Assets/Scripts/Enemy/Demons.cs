@@ -45,6 +45,14 @@ public class Demons : MonoBehaviour
         }
     }
 
+    // Called by GhostBehaviour script
+    public void PossessRandomMannequin()
+    {
+        int rand = Random.Range(0, enemiesToPossess.Count - 1);
+        enemiesToPossess[rand].SetPossession(true);
+    }
+
+
     public void VeryLowBehaviourLevels(ref int walkLevel, ref int possessionLevel, ref int contorsionLevel, ref int levitateLevel)
     {
         if(demonType == DemonType.DEFAULT)

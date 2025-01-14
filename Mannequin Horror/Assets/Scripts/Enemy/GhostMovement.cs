@@ -83,18 +83,22 @@ public class GhostMovement : MonoBehaviour
 
             case 1:
                 agent.speed = 1.5f;
+                agent.stoppingDistance = 5f;
                 break;
 
             case 2:
                 agent.speed = 2.5f;
+                agent.stoppingDistance = 4f;
                 break;
 
             case 3:
                 agent.speed = 3.0f;
+                agent.stoppingDistance = 3f;
                 break;
 
             case 4:
-                agent.speed = 3.5f; 
+                agent.speed = 3.5f;
+                agent.stoppingDistance = 1.5f;
                 break;
         }
 
