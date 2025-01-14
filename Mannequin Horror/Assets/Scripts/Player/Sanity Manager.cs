@@ -20,7 +20,6 @@ public class SanityManager : MonoBehaviour
     {
         // Decrease sanity at an even interval
         currentSanityValue -= sanityDecreaseRate * Time.deltaTime;
-        //Debug.Log("Current Sanity: " + currentSanityValue);
     }
 
     public float GetSanityValue()

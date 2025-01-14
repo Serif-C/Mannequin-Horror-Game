@@ -40,29 +40,27 @@ public class GhostBehaviour : MonoBehaviour
     {
         AssignBehaviourState();
 
-        Debug.Log("playerSanity: " + playerSanity);
-
         // Reference the behaviours for each intensity through `Demons` script and assign levels for each action
         switch (intensity)
         {
             case BehaviourIntensity.VERY_LOW:
-                demonThisRound.VeryLowBehaviourLevels(m_WalkLevel, m_PossessionLevel, m_ContorsionLevel, m_LevitateLevel);
+                demonThisRound.VeryLowBehaviourLevels(ref m_WalkLevel, ref m_PossessionLevel, ref m_ContorsionLevel, ref m_LevitateLevel);
                 break;
 
             case BehaviourIntensity.LOW:
-                demonThisRound.LowBehaviourLevels(m_WalkLevel, m_PossessionLevel, m_ContorsionLevel, m_LevitateLevel);
+                demonThisRound.LowBehaviourLevels(ref m_WalkLevel, ref m_PossessionLevel, ref m_ContorsionLevel, ref m_LevitateLevel);
                 break;
 
             case BehaviourIntensity.MEDIUM:
-                demonThisRound.MediumBehaviourLevels(m_WalkLevel, m_PossessionLevel, m_ContorsionLevel, m_LevitateLevel);
+                demonThisRound.MediumBehaviourLevels(ref m_WalkLevel, ref m_PossessionLevel, ref m_ContorsionLevel, ref m_LevitateLevel);
                 break;
 
             case BehaviourIntensity.HIGH:
-                demonThisRound.HighBehaviourLevels(m_WalkLevel, m_PossessionLevel, m_ContorsionLevel, m_LevitateLevel);
+                demonThisRound.HighBehaviourLevels(ref m_WalkLevel, ref m_PossessionLevel, ref m_ContorsionLevel, ref m_LevitateLevel);
                 break;
 
             case BehaviourIntensity.VERY_HIGH:
-                demonThisRound.VeryHighBehaviourLevels(m_WalkLevel, m_PossessionLevel, m_ContorsionLevel, m_LevitateLevel);
+                demonThisRound.VeryHighBehaviourLevels(ref m_WalkLevel, ref m_PossessionLevel, ref m_ContorsionLevel, ref m_LevitateLevel);
                 break;
         }
     }
@@ -114,7 +112,8 @@ public class GhostBehaviour : MonoBehaviour
         return intensity;
     }
 
-    public int GetWalkLevel()
+    
+    public int GetWalkLevel() // Movement speed is based off this level
     {
         return m_WalkLevel;
     }
