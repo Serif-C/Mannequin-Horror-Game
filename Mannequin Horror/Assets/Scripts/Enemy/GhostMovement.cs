@@ -118,4 +118,9 @@ public class GhostMovement : MonoBehaviour
             StopMoving();
         }
     }
+
+    private void WalkBehaviour()
+    {
+
+    }
 }
