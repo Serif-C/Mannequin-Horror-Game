@@ -1,38 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class GhostBehaviour : MonoBehaviour
 {
-    /*
-     * Enemy Behaviour:
-     * - Based off player sanity
-     * - More intense and complex behaviour as player sanity diminishes
-     * - Example:
-     *      * At sanity range 100 to 80:
-     *          * Haunting Chance (calculated per second) is very low
-     *          * Mannequins can change posture/stance/pose but cannot walk yet
-     *      * At sanity range 80 to 60:
-     *          * Haunting Chance (calculated per second) is slightly higher
-     *          * Mannequins can now walk slowly when outside player line of sight
-     *      * Etc...
-     */
-
     [Header("References")]
     [SerializeField] private float playerSanity;
     [SerializeField] private Animator animator;
+    [SerializeField] private Demons demonThisRound;
 
     [Header("Enemy Status")]
     [SerializeField] private bool isPossessed = false;
-    [SerializeField] private float hauntChance = 0.002f;  // 0.2% chance that a demon would start haunting (calculated every second)
+    [SerializeField] private float hauntChance = 20f; //0.002f;  // 0.2% chance that a demon would start haunting (calculated every second)
     [SerializeField] private bool isHaunting = false;
     [SerializeField] private float hauntDuration = 10f;
-    [SerializeField] private bool isInLineOfSight = false;
-
     [SerializeField] private BehaviourIntensity intensity;
-    enum BehaviourIntensity
+    private int m_WalkLevel = 0;
+    private int m_PossessionLevel = 0;
+    private int m_ContorsionLevel = 0;
+    private int m_LevitateLevel = 0;
+
+    public enum BehaviourIntensity
     {
         VERY_LOW,
         LOW,
@@ -43,7 +32,7 @@ public class GhostBehaviour : MonoBehaviour
 
     private void Start()
     {
-        playerSanity = FindAnyObjectByType<SanityManager>().GetSanityValue();
+        demonThisRound = FindAnyObjectByType<Demons>();
         StartCoroutine(CalculateHauntChance());
     }
 
@@ -51,32 +40,35 @@ public class GhostBehaviour : MonoBehaviour
     {
         AssignBehaviourState();
 
+        // Reference the behaviours for each intensity through `Demons` script and assign levels for each action
         switch (intensity)
         {
             case BehaviourIntensity.VERY_LOW:
-                VeryLowBehaviour();
+                demonThisRound.VeryLowBehaviourLevels(ref m_WalkLevel, ref m_PossessionLevel, ref m_ContorsionLevel, ref m_LevitateLevel);
                 break;
 
             case BehaviourIntensity.LOW:
-                LowBehaviour();
+                demonThisRound.LowBehaviourLevels(ref m_WalkLevel, ref m_PossessionLevel, ref m_ContorsionLevel, ref m_LevitateLevel);
                 break;
 
             case BehaviourIntensity.MEDIUM:
-                MediumBehaviour();
+                demonThisRound.MediumBehaviourLevels(ref m_WalkLevel, ref m_PossessionLevel, ref m_ContorsionLevel, ref m_LevitateLevel);
                 break;
 
             case BehaviourIntensity.HIGH:
-                HighBehaviour();
+                demonThisRound.HighBehaviourLevels(ref m_WalkLevel, ref m_PossessionLevel, ref m_ContorsionLevel, ref m_LevitateLevel);
                 break;
 
             case BehaviourIntensity.VERY_HIGH:
-                VeryHighBehaviour();
+                demonThisRound.VeryHighBehaviourLevels(ref m_WalkLevel, ref m_PossessionLevel, ref m_ContorsionLevel, ref m_LevitateLevel);
                 break;
         }
     }
 
     private void AssignBehaviourState()
     {
+        playerSanity = FindAnyObjectByType<SanityManager>().GetSanityValue();
+
         if (playerSanity >= 80f && playerSanity <= 100f)
             intensity = BehaviourIntensity.VERY_LOW;
 
@@ -89,44 +81,21 @@ public class GhostBehaviour : MonoBehaviour
         else if (playerSanity >= 20f && playerSanity < 40f)
             intensity = BehaviourIntensity.HIGH;
 
-        else
+        else if (playerSanity >= 0f && playerSanity < 20f)
             intensity = BehaviourIntensity.VERY_HIGH;
-    }
-
-    private void VeryLowBehaviour()
-    {
-        
-    }
-
-    private void LowBehaviour()
-    {
-
-    }
-
-    private void MediumBehaviour()
-    {
-
-    }
-
-    private void HighBehaviour()
-    {
-
-    }
-
-    private void VeryHighBehaviour()
-    {
-
     }
 
     private void StartHaunting()
     {
         // Choose one of the mannequins to chase the player
+        demonThisRound.PossessRandomMannequin();
+        Debug.Log("Started Haunting");
     }
 
     private IEnumerator CalculateHauntChance()
     {
         // Only check while not haunting
-        while (!isHaunting)
+        while (!isHaunting && !isPossessed)
         {
             yield return new WaitForSeconds(1);
 
@@ -136,5 +105,37 @@ public class GhostBehaviour : MonoBehaviour
                 yield break;    // Stop checking once haunting starts
             }
         }
+    }
+
+    // GETTERS and SETTERS //
+
+    public BehaviourIntensity GetIntensity()
+    {
+        return intensity;
+    }
+
+    public int GetWalkLevel() // Movement speed is based off this level
+    {
+        return m_WalkLevel;
+    }
+
+    public int GetPossessionLevel()
+    {
+        return m_PossessionLevel;
+    }
+
+    public int GetContorsionLevel()
+    {
+        return m_ContorsionLevel;
+    }
+
+    public int GetLevitationLevel()
+    {
+        return m_LevitateLevel;
+    }
+
+    public void SetPossession(bool isPossessed)
+    {
+        this.isPossessed = isPossessed;
     }
 }
