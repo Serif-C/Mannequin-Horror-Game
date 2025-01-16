@@ -5,6 +5,11 @@ using UnityEngine.AI;
 
 public class GhostMovement : MonoBehaviour
 {
+    /* **** Script Summary ****
+     * Controls the "non-damaging" Mannequins to slowly creep-up 
+     * to the player whenever they are out of sight
+     */
+
     [Header("References")]
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private Transform player;

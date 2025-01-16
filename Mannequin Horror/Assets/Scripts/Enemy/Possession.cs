@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class Possession : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("Reference")]
+    [SerializeField] private GhostBehaviour ghostBehaviour;
+
+    private void Update()
     {
-        
+        if(ghostBehaviour.GetIsPossessed())
+        {
+            HauntForThePlayer();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void HauntForThePlayer()
     {
         
     }

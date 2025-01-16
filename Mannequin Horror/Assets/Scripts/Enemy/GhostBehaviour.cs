@@ -95,7 +95,7 @@ public class GhostBehaviour : MonoBehaviour
     private IEnumerator CalculateHauntChance()
     {
         // Only check while not haunting
-        while (!isHaunting && !isPossessed)
+        while (!isHaunting)
         {
             yield return new WaitForSeconds(1);
 
@@ -132,6 +132,11 @@ public class GhostBehaviour : MonoBehaviour
     public int GetLevitationLevel()
     {
         return m_LevitateLevel;
+    }
+
+    public bool GetIsPossessed()
+    {
+        return isPossessed;
     }
 
     public void SetPossession(bool isPossessed)
