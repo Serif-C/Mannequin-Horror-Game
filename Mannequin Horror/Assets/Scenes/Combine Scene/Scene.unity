@@ -3634,7 +3634,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSanityValue: 100
   currentSanityValue: 0
-  sanityDecreaseRate: 0.05
+  sanityDecreaseRate: 3
   isInDarkness: 0
   isInfluenced: 0
 --- !u!1660057539 &9223372036854775807
