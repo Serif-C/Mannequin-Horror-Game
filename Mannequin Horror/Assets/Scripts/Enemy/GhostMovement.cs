@@ -18,6 +18,12 @@ public class GhostMovement : MonoBehaviour
     [Header("General Attributes")]
     [SerializeField] private bool isInLineOfSight = false;
 
+    [Header("Crowding Attributes")]
+    [SerializeField] private float detectionRadius = 2f;
+    [SerializeField] private float waitTime = 0.5f; // Time to wait before rechecking movement
+    private bool isWaiting = false;
+
+
     private void Start()
     {
         // A bit of error handling, 
@@ -69,6 +75,7 @@ public class GhostMovement : MonoBehaviour
         }
         else
         {
+            HandleCrowding();
             StopMoving();
         }
     }
@@ -116,6 +123,7 @@ public class GhostMovement : MonoBehaviour
         // Stop the ghost when it's in the player's line of sight
         agent.speed = 0f;
         agent.ResetPath(); // Stop movement immediately
+        agent.isStopped = true;
     }
 
     public void SetIsInLineOfSight(bool inSight)
@@ -126,6 +134,31 @@ public class GhostMovement : MonoBehaviour
         {
             StopMoving();
         }
+    }
+
+    private void HandleCrowding()
+    {
+        Collider[] nearbyAgents = Physics.OverlapSphere(transform.position, detectionRadius);
+        foreach(Collider collider in nearbyAgents)
+        {
+            if(collider.CompareTag("Enemy") && collider.gameObject != this.gameObject)
+            {
+                NavMeshAgent nearbyAgent = collider.GetComponent<NavMeshAgent>();
+
+                if(nearbyAgent != null && nearbyAgent.isStopped)
+                {
+                    isWaiting = true;
+                    Invoke(nameof(ResumeMovement), waitTime); // Wait before moving
+                    return;
+                }
+            }
+        }
+    }
+
+    private void ResumeMovement()
+    {
+        if (!isInLineOfSight)
+            agent.isStopped = false;
     }
 
     private void WalkBehaviour()
