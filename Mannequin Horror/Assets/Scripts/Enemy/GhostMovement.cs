@@ -20,8 +20,7 @@ public class GhostMovement : MonoBehaviour
 
     [Header("Crowding Attributes")]
     [SerializeField] private float detectionRadius = 2f;
-    [SerializeField] private float waitTime = 0.5f; // Time to wait before rechecking movement
-    private bool isWaiting = false;
+    [SerializeField] private float separationStrength = 2f;
 
 
     private void Start()
@@ -71,19 +70,18 @@ public class GhostMovement : MonoBehaviour
         // Continuously check if the ghost is in line of sight and adjust movement accordingly
         if (!isInLineOfSight)
         {
+            HandleCrowding();
             MoveTowardsPlayer();
         }
         else
         {
-            HandleCrowding();
+            //HandleCrowding();
             StopMoving();
         }
     }
 
     private void MoveTowardsPlayer()
     {
-        // Update player reference every frame (ensures movement remains dynamic)
-        player = GameObject.FindGameObjectWithTag("Player").transform;
         int walkLevel = behaviour.GetWalkLevel();
 
         // Varied movement for testing purposes only
@@ -115,7 +113,10 @@ public class GhostMovement : MonoBehaviour
         }
 
         // Move towards the player
-        agent.SetDestination(player.position);
+        if (player != null)
+        {
+            agent.SetDestination(player.position);
+        }
     }
 
     private void StopMoving()
@@ -123,7 +124,6 @@ public class GhostMovement : MonoBehaviour
         // Stop the ghost when it's in the player's line of sight
         agent.speed = 0f;
         agent.ResetPath(); // Stop movement immediately
-        agent.isStopped = true;
     }
 
     public void SetIsInLineOfSight(bool inSight)
@@ -139,26 +139,27 @@ public class GhostMovement : MonoBehaviour
     private void HandleCrowding()
     {
         Collider[] nearbyAgents = Physics.OverlapSphere(transform.position, detectionRadius);
-        foreach(Collider collider in nearbyAgents)
-        {
-            if(collider.CompareTag("Enemy") && collider.gameObject != this.gameObject)
-            {
-                NavMeshAgent nearbyAgent = collider.GetComponent<NavMeshAgent>();
+        Vector3 separationForce = Vector3.zero;
 
-                if(nearbyAgent != null && nearbyAgent.isStopped)
+        foreach (Collider collider in nearbyAgents)
+        {
+            if (collider.CompareTag("Enemy") && collider.gameObject != this.gameObject)
+            {
+                Vector3 direction = transform.position - collider.transform.position;
+                float distance = direction.magnitude;
+
+                if (distance < detectionRadius) // If too close
                 {
-                    isWaiting = true;
-                    Invoke(nameof(ResumeMovement), waitTime); // Wait before moving
-                    return;
+                    separationForce += direction.normalized / distance; // Add separation force
                 }
             }
         }
-    }
 
-    private void ResumeMovement()
-    {
-        if (!isInLineOfSight)
-            agent.isStopped = false;
+        if (separationForce != Vector3.zero)
+        {
+            Vector3 newPosition = transform.position + separationForce * separationStrength;
+            agent.SetDestination(newPosition); // Dynamically adjust position
+        }
     }
 
     private void WalkBehaviour()
