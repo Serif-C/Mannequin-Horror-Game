@@ -680,7 +680,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   demonThisRound: {fileID: 0}
   isPossessed: 0
-  hauntChance: 0.002
+  hauntChance: 20
   isHaunting: 0
   hauntDuration: 10
   intensity: 0
