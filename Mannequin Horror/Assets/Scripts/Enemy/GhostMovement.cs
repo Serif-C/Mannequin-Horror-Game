@@ -18,6 +18,11 @@ public class GhostMovement : MonoBehaviour
     [Header("General Attributes")]
     [SerializeField] private bool isInLineOfSight = false;
 
+    [Header("Crowding Attributes")]
+    [SerializeField] private float detectionRadius = 2f;
+    [SerializeField] private float separationStrength = 2f;
+
+
     private void Start()
     {
         // A bit of error handling, 
@@ -65,18 +70,18 @@ public class GhostMovement : MonoBehaviour
         // Continuously check if the ghost is in line of sight and adjust movement accordingly
         if (!isInLineOfSight)
         {
+            HandleCrowding();
             MoveTowardsPlayer();
         }
         else
         {
+            //HandleCrowding();
             StopMoving();
         }
     }
 
     private void MoveTowardsPlayer()
     {
-        // Update player reference every frame (ensures movement remains dynamic)
-        player = GameObject.FindGameObjectWithTag("Player").transform;
         int walkLevel = behaviour.GetWalkLevel();
 
         // Varied movement for testing purposes only
@@ -108,7 +113,10 @@ public class GhostMovement : MonoBehaviour
         }
 
         // Move towards the player
-        agent.SetDestination(player.position);
+        if (player != null)
+        {
+            agent.SetDestination(player.position);
+        }
     }
 
     private void StopMoving()
@@ -125,6 +133,32 @@ public class GhostMovement : MonoBehaviour
         if (inSight)
         {
             StopMoving();
+        }
+    }
+
+    private void HandleCrowding()
+    {
+        Collider[] nearbyAgents = Physics.OverlapSphere(transform.position, detectionRadius);
+        Vector3 separationForce = Vector3.zero;
+
+        foreach (Collider collider in nearbyAgents)
+        {
+            if (collider.CompareTag("Enemy") && collider.gameObject != this.gameObject)
+            {
+                Vector3 direction = transform.position - collider.transform.position;
+                float distance = direction.magnitude;
+
+                if (distance < detectionRadius) // If too close
+                {
+                    separationForce += direction.normalized / distance; // Add separation force
+                }
+            }
+        }
+
+        if (separationForce != Vector3.zero)
+        {
+            Vector3 newPosition = transform.position + separationForce * separationStrength;
+            agent.SetDestination(newPosition); // Dynamically adjust position
         }
     }
 

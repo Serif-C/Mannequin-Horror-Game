@@ -11,6 +11,7 @@ public class Possession : MonoBehaviour
     {
         if(ghostBehaviour.GetIsPossessed())
         {
+            Debug.Log(gameObject.name + " is Possessed");
             HauntForThePlayer();
         }
     }
